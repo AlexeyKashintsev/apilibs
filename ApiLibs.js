@@ -23,9 +23,12 @@ define('ApiLibs', ['http-context'], function (HttpContext) {
             for (var i in requestParams){
                 params[i] = self.str2Bool(requestParams[i]);
             }
+            var unfilled = [];
             aRequiredFields.forEach(function(field){
-                if (!params[field])
+                if (!params[field]) {
                     err = true;
+                    unfilled.push(field)
+                }
             });
             if(err){
                 self.setResponseCode(aHttpContext, {
