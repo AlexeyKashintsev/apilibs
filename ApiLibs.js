@@ -28,7 +28,10 @@ define('ApiLibs', ['http-context'], function (HttpContext) {
                     err = true;
             });
             if(err){
-                self.setResponseCode(aHttpContext, {error: 'not fill all fields', code:400}, 400, onSuccessCallback);
+                self.setResponseCode(aHttpContext, {
+                    header: 'Bad params',
+                    explanation: unfilled.toString()
+                }, 409, onSuccessCallback);
             }
             else{
                 if(!callback)
